@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import Radium, {StyleRoot} from 'radium';
 import './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
   state = {
     persons: [
-      {name: 'Rahad', age: 27},
-      {name: 'Oishy', age: 26},
-      {name: 'Mazhar', age: 28}
+      {id: 'asd', name: 'Rahad', age: 27},
+      {id: 'ase', name: 'Oishy', age: 26},
+      {id: 'asf', name: 'Mazhar', age: 28}
     ],
     showPerson : false
   }
@@ -29,24 +30,55 @@ class App extends Component {
     } )
   }
 
-  changeNameHandler = (event) => {
-    this.setState( {
-      persons: [
-        {name: 'Rahad', age: 27},
-        {name: event.target.value, age: 26},
-        {name: 'Mazhar', age: 28}
-      ]
-    } )
+  changeNameHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id; // Match the exact ID of which persons name being changing
+    });
+    
+    // Make a copy of the matched person name
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    //get the new person name value from the input
+    person.name = event.target.value;
+    
+    // Overwrite the persons name with new value
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    // Set the new state with new person
+    this.setState({persons: persons });
+
+  }
+
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice;
+    const persons = [...this.state.persons];
+    persons.splice(personIndex,1);
+    this.setState({persons: persons})
   }
 
   render() {
 
     const btnStyle = {
-      background : 'white',
-      color : '#222',
+      background : 'green',
+      color : '#fff',
       padding : '8px',
       border : '1px solid #d5e6e5',
-      fontSize : '15px'
+      fontSize : '15px',
+      ':hover' : {
+        background: 'lightgreen',
+        color:'black'
+      }
+    }
+
+    const vstyle =[];
+    if(this.state.persons.length <= 2) {
+      vstyle.push('red');
+    }
+    if(this.state.persons.length <= 1) {
+      vstyle.push('bold');
     }
 
     let persons = null;
@@ -54,32 +86,38 @@ class App extends Component {
     if(this.state.showPerson) {
       persons = (
         <div>
-          <Person 
-            name={this.state.persons[0].name} 
-            age={this.state.persons[0].age}>
-          </Person>
-          <Person 
-            name={this.state.persons[1].name} 
-            age={this.state.persons[1].age} 
-            click={this.switchNameHandler.bind(this, 'Mr Rahad')} 
-            change={this.changeNameHandler}> Rahad's wife
-          </Person>
-          <Person 
-            name={this.state.persons[2].name} 
-            age={this.state.persons[2].age}>
-          </Person>
+          {this.state.persons.map((person, index) => {
+            return <Person
+              key={person.id}
+              click = {this.deletePersonHandler.bind(this, index)}
+              name={person.name}
+              age={person.age}
+              change = {(event) => {this.changeNameHandler(event, person.id)}} />
+          })}
         </div>
       )
+
+      btnStyle.background = 'red';
+      btnStyle[':hover'] = {
+        background: 'salmon',
+        color: 'black'
+      }
     }
 
     return (
-      <div className="App">
-        <h1>Hi, I am a react app</h1>
-        <button style={btnStyle} onClick={this.personToggleHandler}>Switch name</button>
-        {persons}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, I am a react app</h1>
+          <button style={btnStyle} onClick={this.personToggleHandler}>Switch name</button>
+
+          <p className={vstyle.join(' ')}>This is working</p>
+
+          {persons}
+          
+        </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App);

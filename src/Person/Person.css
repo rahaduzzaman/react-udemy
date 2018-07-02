@@ -5,3 +5,9 @@
     border: 1px solid #e5e5e5;
     padding: 20px;
 }
+.red {
+    color: red;
+}
+.bold {
+    font-weight: 700;
+}
