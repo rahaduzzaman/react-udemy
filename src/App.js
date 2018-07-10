@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -68,12 +68,12 @@ class App extends Component {
       fontSize : '15px'
     }
 
-    const vstyle =[];
+    const vstyle = [];
     if(this.state.persons.length <= 2) {
-      vstyle.push('red');
+      vstyle.push( classes.red );
     }
     if(this.state.persons.length <= 1) {
-      vstyle.push('bold');
+      vstyle.push( classes.bold );
     }
 
     let persons = null;
@@ -96,7 +96,7 @@ class App extends Component {
     }
 
     return (
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hi, I am a react app</h1>
           <button style={btnStyle} onClick={this.personToggleHandler}>Switch name</button>
 
