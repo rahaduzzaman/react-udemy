@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Radium, {StyleRoot} from 'radium';
 import './App.css';
 import Person from './Person/Person';
 
@@ -66,11 +65,7 @@ class App extends Component {
       color : '#fff',
       padding : '8px',
       border : '1px solid #d5e6e5',
-      fontSize : '15px',
-      ':hover' : {
-        background: 'lightgreen',
-        color:'black'
-      }
+      fontSize : '15px'
     }
 
     const vstyle =[];
@@ -98,14 +93,9 @@ class App extends Component {
       )
 
       btnStyle.background = 'red';
-      btnStyle[':hover'] = {
-        background: 'salmon',
-        color: 'black'
-      }
     }
 
     return (
-      <StyleRoot>
         <div className="App">
           <h1>Hi, I am a react app</h1>
           <button style={btnStyle} onClick={this.personToggleHandler}>Switch name</button>
@@ -115,9 +105,8 @@ class App extends Component {
           {persons}
           
         </div>
-      </StyleRoot>
     );
   }
 }
 
-export default Radium(App);
+export default App;
