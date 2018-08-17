@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from './Person/Person';
+import Persons from '../components/Persons/Persons';
 
 class App extends Component {
   state = {
@@ -60,14 +60,6 @@ class App extends Component {
 
   render() {
 
-    const btnStyle = {
-      background : 'green',
-      color : '#fff',
-      padding : '8px',
-      border : '1px solid #d5e6e5',
-      fontSize : '15px'
-    }
-
     const vstyle = [];
     if(this.state.persons.length <= 2) {
       vstyle.push( classes.red );
@@ -77,30 +69,23 @@ class App extends Component {
     }
 
     let persons = null;
+    let btnClass = '';
 
     if(this.state.showPerson) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return <Person
-              key={person.id}
-              click = {this.deletePersonHandler.bind(this, index)}
-              name={person.name}
-              age={person.age}
-              change = {(event) => {this.changeNameHandler(event, person.id)}} />
-          })}
+          <Persons 
+            persons = {this.state.persons}
+            clicked = {this.deletePersonHandler}
+            changed = {this.changeNameHandler} />
+            
         </div>
-      )
-
-      btnStyle.background = 'red';
+      );
+      btnClass = classes.clicked;
     }
 
     return (
         <div className={classes.App}>
-          <h1>Hi, I am a react app</h1>
-          <button style={btnStyle} onClick={this.personToggleHandler}>Switch name</button>
-
-          <p className={vstyle.join(' ')}>This is working</p>
 
           {persons}
           
