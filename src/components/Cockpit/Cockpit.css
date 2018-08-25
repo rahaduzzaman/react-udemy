@@ -1,0 +1,33 @@
+.red {
+    color: red;
+}
+  
+.bold {
+    font-weight: 700;
+}
+
+.Cockpit button {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: yellow;
+    background-color: #333300;
+    padding: 5px 15px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.Cockpit button:hover {
+    background-color: aqua;
+    color: #333300;
+    border: 1px solid #333300;
+}
+  
+.Cockpit button.clicked {
+    color: brown;
+    font-weight: 600;
+    background-color: wheat;
+    border: 1px solid brown;
+}
+  
+  

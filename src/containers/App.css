@@ -4,36 +4,6 @@
   padding: 20px 0; 
 }
 
-.App button {
-  border: 1px solid transparent;
-  border-radius: 4px;
-  color: yellow;
-  background-color: #333300;
-  padding: 5px 15px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-.App button:hover {
-  background-color: aqua;
-  color: #333300;
-  border: 1px solid #333300;
-}
-
-.App button.clicked {
-  color: brown;
-  background-color: bisque;
-  border: 1px solid brown;
-}
-
-.red {
-  color: red;
-}
-
-.bold {
-  font-weight: 700;
-}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

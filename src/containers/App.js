@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
     persons: [
       {id: 'asd', name: 'Rahad', age: 27},
       {id: 'ase', name: 'Oishy', age: 26},
-      {id: 'asf', name: 'Mazhar', age: 28}
+      {id: 'asg', name: 'Mazhar', age: 28}
     ],
     showPerson : false
   }
@@ -60,16 +61,8 @@ class App extends Component {
 
   render() {
 
-    const vstyle = [];
-    if(this.state.persons.length <= 2) {
-      vstyle.push( classes.red );
-    }
-    if(this.state.persons.length <= 1) {
-      vstyle.push( classes.bold );
-    }
-
     let persons = null;
-    let btnClass = '';
+    
 
     if(this.state.showPerson) {
       persons = (
@@ -81,12 +74,17 @@ class App extends Component {
             
         </div>
       );
-      btnClass = classes.clicked;
+      
     }
 
     return (
         <div className={classes.App}>
-
+          <Cockpit 
+            appTitle = {this.props.title}
+            showPerson = {this.state.showPerson}
+            persons = {this.state.persons}
+            clicked = {this.personToggleHandler}
+          />
           {persons}
           
         </div>
